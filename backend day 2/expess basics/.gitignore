@@ -1,0 +1,28 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# dotenv environment variables
+.env
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Optional: VSCode settings
+.vscode/
+
+# Optional: Coverage reports
+coverage/
+
+# Optional: Build artifacts
+dist/
+build/

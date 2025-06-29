@@ -1,0 +1,51 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Step 1: Copy the Primary Key from Main Table
+// Step 2: Make Relationship
+// Step 3: Copy the Second to Main Table
+
+model Student {
+  roll_no String  @id @default(uuid()) // Primary Key
+  name    String
+  class   String?
+  age     String
+
+  proof   Proof? // One-to-One relationship
+  payment Payment[] // One-to-Many relationship
+}
+
+model Proof {
+  proof_id   String    @id @default(cuid())
+  proof_type ProofType
+  proof_url  String
+
+  roll_no String  @unique
+  student Student @relation(fields: [roll_no], references: [roll_no])
+}
+
+model Payment {
+  payment_id     String        @id @default(uuid())
+  payment_method PaymentMethod
+  amount         String
+  transaction_id String
+
+  roll_no String
+  Student Student @relation(fields: [roll_no], references: [roll_no])
+}
+
+enum ProofType {
+  AADHARCARD
+  PANCARD
+}
+
+enum PaymentMethod {
+  CASH
+  NEFT
+}
